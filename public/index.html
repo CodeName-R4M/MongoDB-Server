@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Login</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Monospace font for hacker feel */
+            background-color: #1d1f21; /* Dark background */
+            color: #c5c8c6; /* Light grey text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars */
+        }
+        .container {
+            background-color: #282a2e; /* Slightly lighter dark background */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Neon green glow */
+            padding: 20px;
+            width: 350px;
+            text-align: center;
+            position: relative;
+        }
+        h2 {
+            color: #00ff00; /* Neon green for the header */
+            text-shadow: 0 0 10px #00ff00; /* Glow effect */
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between; /* Aligns labels and inputs */
+            margin-bottom: 15px;
+            align-items: center; /* Vertically center the label and input */
+        }
+        label {
+            color: #66d9ef; /* Light blue for labels */
+            width: 30%; /* Fixed width for labels */
+            text-align: right; /* Align labels to the right */
+            margin-right: 10px; /* Space between label and input */
+        }
+        input[type="text"], input[type="password"] {
+            width: 70%; /* Make inputs take the remaining space */
+            padding: 10px;
+            border: 1px solid #66d9ef; /* Light blue border */
+            border-radius: 5px;
+            background-color: #1d1f21; /* Match background */
+            color: #c5c8c6; /* Light grey text */
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #00ff00; /* Neon green on focus */
+        }
+        button {
+            background-color: #00ff00; /* Neon green button */
+            color: #1d1f21; /* Dark text */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #66ff66; /* Lighter green on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #999; /* Gray text */
+        }
+        .glitch {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('https://media.giphy.com/media/m3iL1FfWZzq7tI6YZa/giphy.gif') center / cover;
+            opacity: 0.2;
+            z-index: -1; /* Send behind the form */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="footer">Enter your credentials to proceed</div>
+        <div class="glitch"></div> <!-- Glitch background -->
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Send a POST request to register the user
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+        alert(result.message); // Display success or error message
+    });
+    </script>
+</body>
+</html>
