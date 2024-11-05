@@ -2,8 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();  // Load environment variables
-
+const MONGO_URL="mongodb+srv://sriram:SRIRAM99@ram-cluster.9y8uc.mongodb.net/studentdb";
 const app = express();
 const PORT = 5000;
 
@@ -11,7 +10,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json()); // For parsing application/json
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URL)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log('MongoDB connection error:', err));
 
